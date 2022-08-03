@@ -8,12 +8,7 @@ import time
 import datetime
 from authenticator import authentic
 
-root = Tk()
-root.title('AutoBackup for Allplan')
-root.geometry('600x300')
 
-c = Canvas(root, height=500, width=1500)
-c.place(relwidth=1, relheight=1)
 
 class PathUtil:
 
@@ -23,7 +18,7 @@ class PathUtil:
 
 class Backup:
 
-    def __init__(self, load_path="", save_path="", factor=5, interval=5, counter = 0, overall = 0):
+    def __init__(self, load_path="//ALPLAN/alplan/BG/Prj", save_path="//dp.pekabex.poznan/daneprojektowy/Foldery osobiste/Artur Wysocki/!ALLPLAN-BACKUP", factor=5, interval=5, counter = 0, overall = 0):
         self.load_path = load_path
         self.save_path = save_path
         self.factor = factor     # factor used to compensate saving time, prevents to skip files saving
@@ -67,12 +62,11 @@ class Backup:
         Open choose save directory dialog window, return save path
         """
 
-        file_path = filedialog.askdirectory()
-        save_path = str(file_path)
+        save_path = filedialog.askdirectory()
 
-        target_label = Label(c, text='Kopiuję do:     \n' + str(file_path))
+        target_label = Label(c, text='Kopiuję do:     \n' + str(save_path))
         target_label.pack()
-        target_label.place(relwidth=1, relheight=0.1, rely=0.88)
+        target_label.place(relwidth=1, relheight=0.1, rely=0.80)
 
         self.save_path = save_path
 
@@ -85,7 +79,7 @@ class Backup:
 
         SourceLabel = Label(c, text='Kopiuję z:     \n' + str(load_path))
         SourceLabel.pack()
-        SourceLabel.place(relwidth=1, relheight=0.1, rely=0.75)
+        SourceLabel.place(relwidth=1, relheight=0.1, rely=0.65)
 
         self.load_path = load_path
 
@@ -170,6 +164,9 @@ class Backup:
 
     def graphic_interface(self):
 
+        load_path = self.load_path
+        save_path = self.save_path
+
         n = StringVar()
         delay = ttk.Combobox(c, width=27, font='calibri', textvariable=n)
         delay.pack()
@@ -183,11 +180,19 @@ class Backup:
         delay.current(3)
 
         target_path = Button(c, text='Dokąd kopiować?', font='calibri', border=5, command=self.target_path)
-        target_path.place(relwidth=1, relheight=0.2, rely=0.4)
+        target_path.place(relwidth=1, relheight=0.15, rely=0.3)
 
         source_path = Button(c, text='Skąd kopiować?', font='calibri', border=5, command=self.source_path)
         source_path.pack()
-        source_path.place(relwidth=1, relheight=0.2, rely=0.2)
+        source_path.place(relwidth=1, relheight=0.15, rely=0.15)
+
+        source_label = Label(c, text='Kopiuję z:     \n' + str(load_path))
+        source_label.pack()
+        source_label.place(relwidth=1, relheight=0.1, rely=0.65)
+
+        target_label = Label(c, text='Kopiuję do:     \n' + str(save_path))
+        target_label.pack()
+        target_label.place(relwidth=1, relheight=0.1, rely=0.80)
 
         # testowy = Button(c,text='GetFiles', command=GetFiles)
         # testowy.pack()
@@ -206,7 +211,7 @@ class Backup:
 
         backup = Button(c, text='ROZPOCZNIJ', font='calibri', border=5, command=lambda: [check_data(), self.main_process()])
         backup.pack()
-        backup.place(relwidth=1, relheight=0.2, rely=0.6)
+        backup.place(relwidth=1, relheight=0.15, rely=0.45)
         #
         root.mainloop()
 
@@ -217,6 +222,14 @@ if granted:
     print("Access granted!")
 
     time.sleep(2)
+
+    root = Tk()
+    root.title('AutoBackup for Allplan')
+    root.geometry('600x300')
+
+    c = Canvas(root, height=1000, width=1500)
+    c.place(relwidth=1, relheight=1)
+
     x = Backup()
     x.graphic_interface()
 
