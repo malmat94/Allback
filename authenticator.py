@@ -2,7 +2,7 @@ import os
 
 def authentic(user):
 
-    admins = ["mateusz.malicki"]
+    admins = ["mateusz.malicki", "agata.chojnicka"]
 
     if user in admins:
         access = True
