@@ -1,0 +1,27 @@
+1. Log file generator with informations with:
+ - total amount of errors
+ - date and time of every FileNotFoundError exception
+ - date and time of every PermissionError exception
+
+2. Script for purging unused project files in backup directory:
+ - Purge multiplied files in every project directory after 7 days
+ - Purge duplicated files in projects used later than 30 days
+
+3. Annotation with sms/email while handling exceptions:
+ -  FileNotFoundError exception
+ -  PermissionError exception
+
+4. Full personal backup:
+ - copy every project folder to users directory:
+  + automatically searching for user directory in "Foldery osobiste" according to authenticator data
+  + automatically choose every project folder (starts with a number)
+  + option for adding/ deleting folders from default set
+  + chosen folders displayed in TK not in CMD
+
+5. Extend the authenticators
+
+6. Extend window:
+ - every printed info have to be shown in tk window, not in separated window of cmd
+ - add additional windos (first manu with several options, than options windows)
+ 
+
